@@ -14,8 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GamePlay extends Activity {
-	
+public class GamePlay_arc_circle extends Activity {
 	private ImageView mImageView1;
 	private ImageView mImageView2;
 	Button player1, player2,start ;
@@ -26,6 +25,10 @@ public class GamePlay extends Activity {
 	static int noOfRounds = 0;
 	
 	Random rn = new Random();
+	
+	ArcTranslate anim ;
+	ArcTranslate anim1;
+	float a,b;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,13 +62,13 @@ public class GamePlay extends Activity {
 				// TODO Auto-generated method stub
 				if(!startClicked)
 				{	
-					translate.run();
+					//translate.run();
 					
-					/*Animation anim = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
+					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
 					mImageView1.startAnimation(anim);
 					
-					Animation anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
-					mImageView2.startAnimation(anim1);*/
+					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
+					mImageView2.startAnimation(anim1);
 					
 					noOfRounds++;
 					clicked = false;
@@ -99,9 +102,12 @@ public class GamePlay extends Activity {
 				
 				if(!clicked && startClicked)
 				{
+					a = anim.myY;
+					Log.i("myValues",Float.toString(mImageView1.getBottom()));
 					stopObjects();
 					clicked  = true;
-					if(victory())
+					//if(victory())
+					if(victory2())
 					{
 						player1.setBackgroundColor(0xFF00FF00);
 						player1.setText("YOU WON");
@@ -129,9 +135,12 @@ public class GamePlay extends Activity {
 				
 				if(!clicked && startClicked)
 				{
+					b = anim.myY;
+					Log.i("myValues",Float.toString(b));
 					stopObjects();
 					clicked  = true;
-					if(victory())
+					//if(victory())
+					if(victory2())
 					{
 						player2.setBackgroundColor(0xFF00FF00);
 						player2.setText("YOU WON");
@@ -211,6 +220,11 @@ public class GamePlay extends Activity {
 		float diff = ( mImageView2.getTop()- mImageView1.getTop());
 		float trans = mImageView1.getTranslationY()-mImageView2.getTranslationY();
 		if(trans+ih>=diff ) return true;
+		else return false;
+	}
+	boolean victory2()
+	{
+		if(anim.myY>=2*mImageView1.getBottom())return true;
 		else return false;
 	}
 }

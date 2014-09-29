@@ -14,8 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GamePlay extends Activity {
-	
+public class GamePlay_tri_trans extends Activity{
 	private ImageView mImageView1;
 	private ImageView mImageView2;
 	Button player1, player2,start ;
@@ -37,7 +36,7 @@ public class GamePlay extends Activity {
 		//}
 		Log.i("Level ",value);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_play);
+		setContentView(R.layout.game_play_tri);
 		
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
