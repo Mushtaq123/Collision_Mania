@@ -66,8 +66,8 @@ protected void applyTransformation(float interpolatedTime, Transformation t) {
     float dx = calcBezier(interpolatedTime, start.x, middle.x, end.x);
     float dy = calcBezier(interpolatedTime, start.y, middle.y, end.y);
     
-    myX +=dx;
-    myY +=dy;
+    myX =dx;
+    myY =dy;
 
     t.getMatrix().setTranslate(dx, dy);
 }

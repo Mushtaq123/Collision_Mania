@@ -28,7 +28,7 @@ public class GamePlay_arc_circle extends Activity {
 	
 	ArcTranslate anim ;
 	ArcTranslate anim1;
-	float a,b;
+	float x1,y1,x2,y2;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -102,12 +102,22 @@ public class GamePlay_arc_circle extends Activity {
 				
 				if(!clicked && startClicked)
 				{
-					a = anim.myY;
+					y1 = anim.myY;
+					y2 = anim1.myY;
+					x1 = anim.myX;
+					x2 = anim1.myX;
+					
 					Log.i("myValues",Float.toString(mImageView1.getBottom()));
+					
+					Log.i("myValues",Float.toString(x1));
+					Log.i("myValues",Float.toString(y1));
+					
+					Log.i("myValues",Float.toString(x2));
+					Log.i("myValues",Float.toString(y2));
 					stopObjects();
 					clicked  = true;
 					//if(victory())
-					if(victory2())
+					if(victory2(x1,y1,x2,y2))
 					{
 						player1.setBackgroundColor(0xFF00FF00);
 						player1.setText("YOU WON");
@@ -135,12 +145,22 @@ public class GamePlay_arc_circle extends Activity {
 				
 				if(!clicked && startClicked)
 				{
-					b = anim.myY;
-					Log.i("myValues",Float.toString(b));
+					y1 = anim.myY;
+					y2 = anim1.myY;
+					x1 = anim.myX;
+					x2 = anim1.myX;
+					
+					Log.i("myValues",Float.toString(mImageView1.getBottom()));
+					
+					Log.i("myValues",Float.toString(x1));
+					Log.i("myValues",Float.toString(y1));
+					
+					Log.i("myValues",Float.toString(x2));
+					Log.i("myValues",Float.toString(y2));
 					stopObjects();
 					clicked  = true;
 					//if(victory())
-					if(victory2())
+					if(victory2(x1,y1,x2,y2))
 					{
 						player2.setBackgroundColor(0xFF00FF00);
 						player2.setText("YOU WON");
@@ -222,9 +242,21 @@ public class GamePlay_arc_circle extends Activity {
 		if(trans+ih>=diff ) return true;
 		else return false;
 	}
-	boolean victory2()
+	boolean victory2(float x1,float y1,float x2, float y2)
 	{
-		if(anim.myY>=2*mImageView1.getBottom())return true;
+		float ih=mImageView1.getMeasuredHeight();//height of imageView
+		float iw=mImageView1.getMeasuredWidth();//width of imageView
+		float iH=mImageView1.getDrawable().getIntrinsicHeight();//original height of underlying image
+		float iW=mImageView1.getDrawable().getIntrinsicWidth();//original width of underlying image
+
+		if (ih/iH<=iw/iW) iw=iW*ih/iH;//rescaled width of image within ImageView
+		else ih= iH*iw/iW;//rescaled height of image within ImageView
+		float diff = ( mImageView2.getTop()- mImageView1.getTop());
+		float trans = y1-y2;
+		float trans2 = x1-x2;
+		if(trans+ih>=diff && trans2<=ih  ) return true;
+		
+		//if(y1-y2>=2*mImageView1.getBottom())return true;
 		else return false;
 	}
 }
