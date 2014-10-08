@@ -20,7 +20,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/triangle_down"
+        android:src="@drawable/triangle1"
         android:layout_weight="0.2" >
     </ImageView>
 
@@ -77,7 +77,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
-        android:src="@drawable/triangle_up"
+        android:src="@drawable/triangle"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.2" />
     

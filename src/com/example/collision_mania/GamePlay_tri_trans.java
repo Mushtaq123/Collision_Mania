@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -49,7 +50,7 @@ public class GamePlay_tri_trans extends Activity{
 		s2 = (TextView) findViewById(R.id.score2);
 		
 		
-		
+		//moveToBack(mImageView2);
 		
 		start.setOnClickListener(new View.OnClickListener() {
 			
@@ -211,5 +212,14 @@ public class GamePlay_tri_trans extends Activity{
 		float trans = mImageView1.getTranslationY()-mImageView2.getTranslationY();
 		if(trans+ih>=diff ) return true;
 		else return false;
+	}
+	private void moveToBack(View currentView) 
+	{
+	    ViewGroup vg = ((ViewGroup) currentView.getParent());
+	    int index = vg.indexOfChild(currentView);
+	    for(int i = 0; i<index; i++)
+	    {
+	    vg.bringChildToFront(vg.getChildAt(0));
+	    }
 	}
 }

@@ -17,6 +17,10 @@ import android.widget.TextView;
 public class GamePlay_arc_circle extends Activity {
 	private ImageView mImageView1;
 	private ImageView mImageView2;
+	
+	//private ImageView newImageView1;
+	//private ImageView newImageView2;
+	
 	Button player1, player2,start ;
 	TextView tv,s1,s2;
 	
@@ -44,6 +48,10 @@ public class GamePlay_arc_circle extends Activity {
 		
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
+		
+		
+	//	newImageView1.setVisibility(View.INVISIBLE);
+		//newImageView2.setVisibility(View.INVISIBLE);
 		
 		player1 = (Button) findViewById(R.id.button1);
 		player2 = (Button) findViewById(R.id.button2);
@@ -216,15 +224,27 @@ public class GamePlay_arc_circle extends Activity {
 	void stopObjects()
 	{
 		
-		Float f = mImageView1.getTranslationY();
+		/*Float f = mImageView1.getTranslationY();
 		Log.i("Try",Float.toString(f) );
 		Float f1 = mImageView2.getTranslationY();
 		Log.i("Try",Float.toString(f1) );
+		//player2.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" ");
+		//tv.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" "+mImageView1.getHeight());*/
 		mImageView1.animate().cancel();
 		mImageView2.animate().cancel();
-		//tv.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" "+mImageView1.getHeight());
+		
 		tv.setVisibility(View.INVISIBLE);
-		//player2.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" ");
+		
+		//mImageView1.setVisibility(View.INVISIBLE);
+		//mImageView2.setVisibility(View.INVISIBLE);
+		
+		//newImageView1.setVisibility(View.VISIBLE);newImageView2.setVisibility(View.VISIBLE);
+		
+		//mImageView1.setX(x1);
+		//mImageView1.setY(y1);
+		//mImageView2.setX(x2);
+		//mImageView2.setX(y2);
+		
 	}
 	boolean victory()
 	{
