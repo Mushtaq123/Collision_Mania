@@ -1,6 +1,8 @@
 package com.example.collision_mania;
-
 import java.util.Random;
+
+import com.example.collision_mania.ArcTranslate;
+import com.example.collision_mania.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,16 +10,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class GamePlay_tri_trans extends Activity{
+
+public class GamePlay_arc_tri extends Activity {
+	
 	private ImageView mImageView1;
 	private ImageView mImageView2;
+	
+	//private ImageView newImageView1;
+	//private ImageView newImageView2;
+	
 	Button player1, player2,start ;
 	TextView tv,s1,s2;
 	
@@ -26,6 +33,10 @@ public class GamePlay_tri_trans extends Activity{
 	static int noOfRounds = 0;
 	
 	Random rn = new Random();
+	
+	ArcTranslate anim ;
+	ArcTranslate anim1;
+	float x1,y1,x2,y2;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -42,6 +53,10 @@ public class GamePlay_tri_trans extends Activity{
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
 		
+		
+	//	newImageView1.setVisibility(View.INVISIBLE);
+		//newImageView2.setVisibility(View.INVISIBLE);
+		
 		player1 = (Button) findViewById(R.id.button1);
 		player2 = (Button) findViewById(R.id.button2);
 		start = (Button) findViewById(R.id.button3);
@@ -50,7 +65,7 @@ public class GamePlay_tri_trans extends Activity{
 		s2 = (TextView) findViewById(R.id.score2);
 		
 		
-		//moveToBack(mImageView2);
+		
 		
 		start.setOnClickListener(new View.OnClickListener() {
 			
@@ -59,13 +74,14 @@ public class GamePlay_tri_trans extends Activity{
 				// TODO Auto-generated method stub
 				if(!startClicked)
 				{	
-					translate.run();
+					//translate.run();
 					
-					/*Animation anim = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
+					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
 					mImageView1.startAnimation(anim);
+					//mImageView1.animate().rotationBy(15000.0f);
 					
-					Animation anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
-					mImageView2.startAnimation(anim1);*/
+					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
+					mImageView2.startAnimation(anim1);
 					
 					noOfRounds++;
 					clicked = false;
@@ -99,9 +115,22 @@ public class GamePlay_tri_trans extends Activity{
 				
 				if(!clicked && startClicked)
 				{
+					y1 = anim.myY;
+					y2 = anim1.myY;
+					x1 = anim.myX;
+					x2 = anim1.myX;
+					
+					Log.i("myValues",Float.toString(mImageView1.getBottom()));
+					
+					Log.i("myValues",Float.toString(x1));
+					Log.i("myValues",Float.toString(y1));
+					
+					Log.i("myValues",Float.toString(x2));
+					Log.i("myValues",Float.toString(y2));
 					stopObjects();
 					clicked  = true;
-					if(victory())
+					//if(victory())
+					if(victory2(x1,y1,x2,y2))
 					{
 						player1.setBackgroundColor(0xFF00FF00);
 						player1.setText("YOU WON");
@@ -129,9 +158,22 @@ public class GamePlay_tri_trans extends Activity{
 				
 				if(!clicked && startClicked)
 				{
+					y1 = anim.myY;
+					y2 = anim1.myY;
+					x1 = anim.myX;
+					x2 = anim1.myX;
+					
+					Log.i("myValues",Float.toString(mImageView1.getBottom()));
+					
+					Log.i("myValues",Float.toString(x1));
+					Log.i("myValues",Float.toString(y1));
+					
+					Log.i("myValues",Float.toString(x2));
+					Log.i("myValues",Float.toString(y2));
 					stopObjects();
 					clicked  = true;
-					if(victory())
+					//if(victory())
+					if(victory2(x1,y1,x2,y2))
 					{
 						player2.setBackgroundColor(0xFF00FF00);
 						player2.setText("YOU WON");
@@ -169,10 +211,10 @@ public class GamePlay_tri_trans extends Activity{
 					.getDimension(R.dimen.translation);
 			mImageView1.animate().setDuration(time)
 					.setInterpolator(new LinearInterpolator())
-					.translationYBy(translation).rotationBy(720.0f);
+					.translationYBy(translation);
 			mImageView2.animate().setDuration(time)
 			.setInterpolator(new LinearInterpolator())
-			.translationYBy(-translation).rotationBy(-720.0f);
+			.translationYBy(-translation);
 			//tv.setVisibility(View.INVISIBLE);
 			tv.setText("time"+time);
 			/*if(pause)
@@ -187,15 +229,27 @@ public class GamePlay_tri_trans extends Activity{
 	void stopObjects()
 	{
 		
-		Float f = mImageView1.getTranslationY();
+		/*Float f = mImageView1.getTranslationY();
 		Log.i("Try",Float.toString(f) );
 		Float f1 = mImageView2.getTranslationY();
 		Log.i("Try",Float.toString(f1) );
+		//player2.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" ");
+		//tv.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" "+mImageView1.getHeight());*/
 		mImageView1.animate().cancel();
 		mImageView2.animate().cancel();
-		//tv.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" "+mImageView1.getHeight());
+		
 		tv.setVisibility(View.INVISIBLE);
-		//player2.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" ");
+		
+		//mImageView1.setVisibility(View.INVISIBLE);
+		//mImageView2.setVisibility(View.INVISIBLE);
+		
+		//newImageView1.setVisibility(View.VISIBLE);newImageView2.setVisibility(View.VISIBLE);
+		
+		//mImageView1.setX(x1);
+		//mImageView1.setY(y1);
+		//mImageView2.setX(x2);
+		//mImageView2.setX(y2);
+		
 	}
 	boolean victory()
 	{
@@ -213,13 +267,22 @@ public class GamePlay_tri_trans extends Activity{
 		if(trans+ih>=diff ) return true;
 		else return false;
 	}
-	private void moveToBack(View currentView) 
+	boolean victory2(float x1,float y1,float x2, float y2)
 	{
-	    ViewGroup vg = ((ViewGroup) currentView.getParent());
-	    int index = vg.indexOfChild(currentView);
-	    for(int i = 0; i<index; i++)
-	    {
-	    vg.bringChildToFront(vg.getChildAt(0));
-	    }
+		float ih=mImageView1.getMeasuredHeight();//height of imageView
+		float iw=mImageView1.getMeasuredWidth();//width of imageView
+		float iH=mImageView1.getDrawable().getIntrinsicHeight();//original height of underlying image
+		float iW=mImageView1.getDrawable().getIntrinsicWidth();//original width of underlying image
+
+		if (ih/iH<=iw/iW) iw=iW*ih/iH;//rescaled width of image within ImageView
+		else ih= iH*iw/iW;//rescaled height of image within ImageView
+		float diff = ( mImageView2.getTop()- mImageView1.getTop());
+		float trans = y1-y2;
+		float trans2 = x1-x2;
+		if(trans+ih>=diff && trans2<=ih  ) return true;
+		
+		//if(y1-y2>=2*mImageView1.getBottom())return true;
+		else return false;
 	}
+
 }

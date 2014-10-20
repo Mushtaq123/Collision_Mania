@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	Button start,start1,startTri;
+	Button start,start1,startTri,startTri1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
 		start = (Button)findViewById(R.id.button1);
 		start1 = (Button)findViewById(R.id.button2);
 		startTri = (Button)findViewById(R.id.button3);
+		startTri1 = (Button)findViewById(R.id.button4);
 		
 		start.setOnClickListener(new View.OnClickListener() {
 			
@@ -45,6 +46,16 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent myIntent = new Intent(MainActivity.this, GamePlay_tri_trans.class);
+				myIntent.putExtra("Level", "1");
+				MainActivity.this.startActivity(myIntent);
+			}
+		});
+		startTri1.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent myIntent = new Intent(MainActivity.this, GamePlay_arc_tri.class);
 				myIntent.putExtra("Level", "1");
 				MainActivity.this.startActivity(myIntent);
 			}
