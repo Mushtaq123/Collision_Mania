@@ -6,45 +6,54 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="45dp"
-        android:text="Ball-Trans" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="20dp"
-        android:text="Ball-Arc" />
+    tools:context=".MainActivity"
+    android:background="@drawable/blue_and_red" >
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_centerVertical="true"
-        android:text="Triangle" />
+        android:layout_above="@+id/button4"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignRight="@+id/button4"
+        android:layout_marginBottom="34dp"
+        android:background="#000000"
+        android:text="Triangle"
+        android:textColor="#ff0000" />
 
     <Button
         android:id="@+id/button4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"
+        android:background="#000000"
+        android:text="Triangle Arc"
+        android:textColor="#ff0000" />
+
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_marginBottom="42dp"
+        android:background="#000000"
+        android:text="Ball-Trans"
+        android:textColor="#ff0000" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button3"
         android:layout_alignLeft="@+id/button3"
         android:layout_alignRight="@+id/button3"
-        android:layout_below="@+id/button3"
-        android:layout_marginTop="34dp"
-        android:text="Triangle Arc" />
+        android:layout_marginBottom="44dp"
+        android:background="#000000"
+        android:text="Ball-Arc"
+        android:textColor="#ff0000" />
 
 </RelativeLayout>
