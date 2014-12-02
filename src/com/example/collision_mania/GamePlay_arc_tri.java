@@ -1,4 +1,5 @@
 package com.example.collision_mania;
+import java.io.IOException;
 import java.util.Random;
 
 import com.example.collision_mania.ArcTranslate;
@@ -6,6 +7,7 @@ import com.example.collision_mania.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -38,6 +40,8 @@ public class GamePlay_arc_tri extends Activity {
 	ArcTranslate anim1;
 	float x1,y1,x2,y2;
 	
+	MediaPlayer mp,mp1 ;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		String value;
@@ -65,7 +69,8 @@ public class GamePlay_arc_tri extends Activity {
 		s2 = (TextView) findViewById(R.id.score2);
 		
 		
-		
+		mp = MediaPlayer.create(getApplicationContext(), R.raw.backmusic);
+		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
 		start.setOnClickListener(new View.OnClickListener() {
 			
@@ -75,6 +80,16 @@ public class GamePlay_arc_tri extends Activity {
 				if(!startClicked)
 				{	
 					//translate.run();
+					try
+					{
+						//mp.setDataSource(getApplicationContext(), R.raw.backmusic);
+		                //mp.prepare();
+						mp.start();
+					}
+					catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						
+					} 
 					
 					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
 					mImageView1.startAnimation(anim);
@@ -89,6 +104,14 @@ public class GamePlay_arc_tri extends Activity {
 				}
 				if(startClicked && clicked)
 				{
+					try{
+						mp1.pause();
+						mp1.seekTo(0);
+						}
+						catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							
+						} 
 					mImageView1.setY(mImageView1.getTop());
 					mImageView2.setY(mImageView2.getTop());
 					
@@ -115,6 +138,17 @@ public class GamePlay_arc_tri extends Activity {
 				
 				if(!clicked && startClicked)
 				{
+					try
+					{
+						mp.pause();
+						mp.seekTo(0);
+						mp1.start();
+					}
+					catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						
+					} 
+					
 					y1 = anim.myY;
 					y2 = anim1.myY;
 					x1 = anim.myX;
@@ -158,6 +192,17 @@ public class GamePlay_arc_tri extends Activity {
 				
 				if(!clicked && startClicked)
 				{
+					try
+					{
+						mp.pause();
+						mp.seekTo(0);
+						mp1.start();
+					}
+					catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						
+					} 
+					
 					y1 = anim.myY;
 					y2 = anim1.myY;
 					x1 = anim.myX;
