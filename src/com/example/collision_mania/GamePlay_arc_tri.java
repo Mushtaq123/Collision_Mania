@@ -92,10 +92,14 @@ public class GamePlay_arc_tri extends Activity {
 					} 
 					
 					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
+					mImageView1.animate().setDuration(3000)
+					.setInterpolator(new LinearInterpolator()).rotationBy(720.0f);
 					mImageView1.startAnimation(anim);
 					//mImageView1.animate().rotationBy(15000.0f);
 					
 					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
+					mImageView2.animate().setDuration(3000)
+					.setInterpolator(new LinearInterpolator()).rotationBy(720.0f);
 					mImageView2.startAnimation(anim1);
 					
 					noOfRounds++;
