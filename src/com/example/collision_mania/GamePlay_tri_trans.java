@@ -1,6 +1,7 @@
 package com.example.collision_mania;
 
 import java.util.Random;
+import java.lang.Math;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,6 +30,10 @@ public class GamePlay_tri_trans extends Activity{
 	Random rn = new Random();
 	
 	MediaPlayer mp,mp1 ;
+	
+	long startTime;
+	long endTime;
+	long T;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -65,6 +70,7 @@ public class GamePlay_tri_trans extends Activity{
 				{	
 					translate.run();
 					
+					startTime = System.currentTimeMillis();
 					try
 					{
 						//mp.setDataSource(getApplicationContext(), R.raw.backmusic);
@@ -99,6 +105,8 @@ public class GamePlay_tri_trans extends Activity{
 						} 
 					mImageView1.setY(mImageView1.getTop());
 					mImageView2.setY(mImageView2.getTop());
+					mImageView1.setRotation(0);
+					mImageView2.setRotation(0);
 					
 					player1.setText("PLAYER 1");
 					player2.setText("PLAYER 2");
@@ -135,6 +143,7 @@ public class GamePlay_tri_trans extends Activity{
 						
 					} 
 					stopObjects();
+					endTime = System.currentTimeMillis();
 					clicked  = true;
 					if(victory())
 					{
@@ -176,6 +185,7 @@ public class GamePlay_tri_trans extends Activity{
 						
 					} 
 					stopObjects();
+					endTime = System.currentTimeMillis();
 					clicked  = true;
 					if(victory())
 					{
@@ -210,15 +220,16 @@ public class GamePlay_tri_trans extends Activity{
 		public void run() {
 			
 			int time = rn.nextInt(3001)+ 2000; // generating time of animation
+			T = time;
 			
 			float translation = getResources()
 					.getDimension(R.dimen.translation);
 			mImageView1.animate().setDuration(time)
 					.setInterpolator(new LinearInterpolator())
-					.translationYBy(translation).rotationBy(720.0f);
+					.translationYBy(translation).rotationBy(-720.0f);
 			mImageView2.animate().setDuration(time)
 			.setInterpolator(new LinearInterpolator())
-			.translationYBy(-translation).rotationBy(-720.0f);
+			.translationYBy(-translation).rotationBy(720.0f);
 			//tv.setVisibility(View.INVISIBLE);
 			tv.setText("time"+time);
 			/*if(pause)
@@ -245,8 +256,7 @@ public class GamePlay_tri_trans extends Activity{
 	}
 	boolean victory()
 	{
-		
-		
+		//float r = mImageView2.getRotation();		
 		float ih=mImageView1.getMeasuredHeight();//height of imageView
 		float iw=mImageView1.getMeasuredWidth();//width of imageView
 		float iH=mImageView1.getDrawable().getIntrinsicHeight();//original height of underlying image
@@ -254,9 +264,38 @@ public class GamePlay_tri_trans extends Activity{
 
 		if (ih/iH<=iw/iW) iw=iW*ih/iH;//rescaled width of image within ImageView
 		else ih= iH*iw/iW;//rescaled height of image within ImageView
+		
+		double r = 4*Math.PI;
+		long t = (endTime-startTime);
+		if(t>T) t = T;
+		r = r*(t)/(T); // angle rotated till now
+		r = r%(2*Math.PI);
+		
+		double pi = Math.PI;
+		float val = (2*ih)/3;
+		float corr = ih/6;
+		corr = (float)(corr*Math.cos(r));
+		
+		Log.i("Try",Float.toString(val) );
+		
+		if(r>=0 && r<(pi/3)) val = (float)(val*Math.cos(r));
+		else if(r>=(pi/3) && r<((2*pi)/3)) val = (float)(val*Math.cos(2*pi/3-r));
+		else if(r>=(2*pi)/3 && r<pi)val = (float)(val*Math.cos(r-2*pi/3));
+		else if(r>=(pi) && r<((4*pi)/3))
+		{
+			val = (float)(val*Math.cos(4*pi/3-r));
+			Log.i("n",Double.toString(r) );
+		}
+		else if(r>=(4*pi)/3 && r<((5*pi)/3))val = (float)(val*Math.cos(r-4*pi/3));
+		else if(r>=(5*pi)/3 && r<(2*pi))val = (float)(val*Math.cos(2*pi-r));
+		
 		float diff = ( mImageView2.getTop()- mImageView1.getTop());
-		float trans = mImageView1.getTranslationY()-mImageView2.getTranslationY();
-		if(trans+ih>=diff ) return true;
+		float trans = mImageView1.getTranslationY()-mImageView2.getTranslationY()-2*corr;
+		
+		Log.i("Try",Float.toString(ih) );
+		Log.i("Try",Float.toString(val) );
+		Log.i("Try",Double.toString(r) );
+		if(trans+2*val>=diff ) return true;
 		else return false;
 	}
 	private void moveToBack(View currentView) 
