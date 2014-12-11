@@ -42,6 +42,10 @@ public class GamePlay_arc_tri extends Activity {
 	
 	MediaPlayer mp,mp1 ;
 	
+	long startTime;
+	long endTime;
+	long T;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		String value;
@@ -80,6 +84,7 @@ public class GamePlay_arc_tri extends Activity {
 				if(!startClicked)
 				{	
 					//translate.run();
+					startTime = System.currentTimeMillis();
 					try
 					{
 						//mp.setDataSource(getApplicationContext(), R.raw.backmusic);
@@ -101,6 +106,7 @@ public class GamePlay_arc_tri extends Activity {
 					mImageView2.animate().setDuration(3000)
 					.setInterpolator(new LinearInterpolator()).rotationBy(720.0f);
 					mImageView2.startAnimation(anim1);
+					T = anim1.getDuration();
 					
 					noOfRounds++;
 					clicked = false;
@@ -166,6 +172,7 @@ public class GamePlay_arc_tri extends Activity {
 					Log.i("myValues",Float.toString(x2));
 					Log.i("myValues",Float.toString(y2));
 					stopObjects();
+					endTime = System.currentTimeMillis();
 					clicked  = true;
 					//if(victory())
 					if(victory2(x1,y1,x2,y2))
@@ -220,6 +227,7 @@ public class GamePlay_arc_tri extends Activity {
 					Log.i("myValues",Float.toString(x2));
 					Log.i("myValues",Float.toString(y2));
 					stopObjects();
+					endTime = System.currentTimeMillis();
 					clicked  = true;
 					//if(victory())
 					if(victory2(x1,y1,x2,y2))
@@ -325,10 +333,56 @@ public class GamePlay_arc_tri extends Activity {
 
 		if (ih/iH<=iw/iW) iw=iW*ih/iH;//rescaled width of image within ImageView
 		else ih= iH*iw/iW;//rescaled height of image within ImageView
+		
+		double r = 4*Math.PI;
+		long t = (endTime-startTime);
+		if(t>T) t = T;
+		r = r*(t)/(T); // angle rotated till now 
+		double r1 = r+Math.PI/6;
+		r = r%(2*Math.PI);
+		r1 = r1%(2*Math.PI);
+		
+		double pi = Math.PI;
+		float val = (2*ih)/3;
+		float val1 = val;
+		float corr = ih/6;
+		corr = (float)(corr*Math.cos(r));
+		
+		float corr1 = ih/6;
+		corr1 = (float)(corr1*Math.sin(r));
+		
+		Log.i("Try",Float.toString(val) );
+		
+		if(r>=0 && r<(pi/3)) val = (float)(val*Math.cos(r));
+		else if(r>=(pi/3) && r<((2*pi)/3)) val = (float)(val*Math.cos(2*pi/3-r));
+		else if(r>=(2*pi)/3 && r<pi)val = (float)(val*Math.cos(r-2*pi/3));
+		else if(r>=(pi) && r<((4*pi)/3))
+		{
+			val = (float)(val*Math.cos(4*pi/3-r));
+			Log.i("n",Double.toString(r) );
+		}
+		else if(r>=(4*pi)/3 && r<((5*pi)/3))val = (float)(val*Math.cos(r-4*pi/3));
+		else if(r>=(5*pi)/3 && r<(2*pi))val = (float)(val*Math.cos(2*pi-r));
+		
+		if(r1>=0 && r1<(pi/3)) val1 = (float)(val1*Math.cos(r1));
+		else if(r1>=(pi/3) && r1<((2*pi)/3)) val1 = (float)(val1*Math.cos(2*pi/3-r1));
+		else if(r1>=(2*pi)/3 && r1<pi)val1 = (float)(val1*Math.cos(r1-2*pi/3));
+		else if(r1>=(pi) && r1<((4*pi)/3))
+		{
+			val1 = (float)(val1*Math.cos(4*pi/3-r1));
+			Log.i("n",Double.toString(r1) );
+		}
+		else if(r1>=(4*pi)/3 && r1<((5*pi)/3))val1 = (float)(val1*Math.cos(r1-4*pi/3));
+		else if(r1>=(5*pi)/3 && r1<(2*pi))val1 = (float)(val1*Math.cos(2*pi-r1));
+		
 		float diff = ( mImageView2.getTop()- mImageView1.getTop());
-		float trans = y1-y2;
-		float trans2 = x1-x2;
-		if(trans+ih>=diff && trans2<=ih  ) return true;
+		float trans = y1-y2-2*corr;
+		float trans2 = x1-x2-2*corr1;
+		
+		Log.i("Try",Float.toString(ih) );
+		Log.i("Try",Float.toString(val) );
+		Log.i("Try",Double.toString(r) );
+		if(trans+2*val>=diff && trans2<=2*val1  ) return true;
 		
 		//if(y1-y2>=2*mImageView1.getBottom())return true;
 		else return false;
