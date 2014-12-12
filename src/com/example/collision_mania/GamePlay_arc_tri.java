@@ -76,6 +76,7 @@ public class GamePlay_arc_tri extends Activity {
 		mp = MediaPlayer.create(getApplicationContext(), R.raw.backmusic);
 		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
+		score1 = 0;score2 = 0;
 		start.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -84,6 +85,7 @@ public class GamePlay_arc_tri extends Activity {
 				if(!startClicked)
 				{	
 					//translate.run();
+					
 					startTime = System.currentTimeMillis();
 					try
 					{
@@ -95,14 +97,15 @@ public class GamePlay_arc_tri extends Activity {
 						// TODO Auto-generated catch block
 						
 					} 
-					
-					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
+					float diff = ( mImageView2.getTop()- mImageView1.getTop());
+					diff = diff/2;
+					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
 					mImageView1.animate().setDuration(3000)
-					.setInterpolator(new LinearInterpolator()).rotationBy(720.0f);
+					.setInterpolator(new LinearInterpolator()).rotationBy(-720.0f);
 					mImageView1.startAnimation(anim);
 					//mImageView1.animate().rotationBy(15000.0f);
 					
-					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
+					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
 					mImageView2.animate().setDuration(3000)
 					.setInterpolator(new LinearInterpolator()).rotationBy(720.0f);
 					mImageView2.startAnimation(anim1);
@@ -122,6 +125,8 @@ public class GamePlay_arc_tri extends Activity {
 							// TODO Auto-generated catch block
 							
 						} 
+					mImageView1.setRotation(0);
+					mImageView2.setRotation(0);
 					mImageView1.setY(mImageView1.getTop());
 					mImageView2.setY(mImageView2.getTop());
 					

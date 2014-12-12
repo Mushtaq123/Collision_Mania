@@ -56,6 +56,7 @@ public class GamePlay extends Activity {
 		mp = MediaPlayer.create(getApplicationContext(), R.raw.backmusic);
 		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
+		score1 = 0;score2 = 0;
 		start.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -208,16 +209,19 @@ public class GamePlay extends Activity {
 	Runnable translate = new Runnable() {
 		public void run() {
 			
+			
+			float diff = ( mImageView2.getTop()- mImageView1.getTop());
+			diff = diff/2;
 			int time = rn.nextInt(3001)+ 2000; // generating time of animation
 			
 			float translation = getResources()
 					.getDimension(R.dimen.translation);
 			mImageView1.animate().setDuration(time)
 					.setInterpolator(new LinearInterpolator())
-					.translationYBy(translation);
+					.translationYBy(diff);
 			mImageView2.animate().setDuration(time)
 			.setInterpolator(new LinearInterpolator())
-			.translationYBy(-translation);
+			.translationYBy(-diff);
 			//tv.setVisibility(View.INVISIBLE);
 			tv.setText("time"+time);
 			/*if(pause)

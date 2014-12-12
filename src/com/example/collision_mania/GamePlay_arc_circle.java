@@ -67,6 +67,7 @@ public class GamePlay_arc_circle extends Activity {
 		mp = MediaPlayer.create(getApplicationContext(), R.raw.backmusic);
 		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
+		score1 = 0;score2 = 0;
 		start.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -86,11 +87,12 @@ public class GamePlay_arc_circle extends Activity {
 						// TODO Auto-generated catch block
 						
 					} 
-					
-					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,mImageView1.getBottom()+100,Animation.ABSOLUTE,mImageView1.getX(),1);
+					float diff = ( mImageView2.getTop()- mImageView1.getTop());
+					diff = diff/2;
+					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
 					mImageView1.startAnimation(anim);
 					
-					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-mImageView1.getBottom()-100,Animation.ABSOLUTE,mImageView1.getX(),-1);
+					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
 					mImageView2.startAnimation(anim1);
 					
 					noOfRounds++;
