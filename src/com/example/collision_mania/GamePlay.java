@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,10 +23,10 @@ public class GamePlay extends Activity {
 	Button player1, player2,start ;
 	TextView tv,s1,s2;
 	
-	boolean clicked,startClicked ;
+	boolean clicked,startClicked,end ;
 	static int score1 = 0,score2 = 0;
 	static int noOfRounds = 0;
-	
+
 	Random rn = new Random();
 	
 	MediaPlayer mp,mp1 ;
@@ -57,13 +58,15 @@ public class GamePlay extends Activity {
 		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
 		score1 = 0;score2 = 0;
+		end = false;
 		start.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!startClicked)
+				if(!startClicked && !end)
 				{	
+					
 					translate.run();
 					
 					try
@@ -87,7 +90,7 @@ public class GamePlay extends Activity {
 					clicked = false;
 					startClicked = true;
 				}
-				if(startClicked && clicked)
+				if(startClicked && clicked && !end)
 				{
 					try{
 						mp1.pause();
@@ -110,6 +113,11 @@ public class GamePlay extends Activity {
 					
 					startClicked = false;
 					clicked = false;
+					if(score1==10 || score2==10) 
+					{
+						checkEnd();
+						end = true;
+					}
 				}
 			}
 		});
@@ -121,7 +129,7 @@ public class GamePlay extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
 				
-				if(!clicked && startClicked)
+				if(!clicked && startClicked && !end)
 				{
 					
 					try
@@ -162,7 +170,7 @@ public class GamePlay extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
 				
-				if(!clicked && startClicked)
+				if(!clicked && startClicked && !end)
 				{
 					
 					try
@@ -213,7 +221,7 @@ public class GamePlay extends Activity {
 			float diff = ( mImageView2.getTop()- mImageView1.getTop());
 			diff = diff/2;
 			int time = rn.nextInt(3001)+ 2000; // generating time of animation
-			
+			//T = time;
 			float translation = getResources()
 					.getDimension(R.dimen.translation);
 			mImageView1.animate().setDuration(time)
@@ -223,7 +231,7 @@ public class GamePlay extends Activity {
 			.setInterpolator(new LinearInterpolator())
 			.translationYBy(-diff);
 			//tv.setVisibility(View.INVISIBLE);
-			tv.setText("time"+time);
+			tv.setText("time "+time);
 			/*if(pause)
 				try {
 					this.wait(1000);
@@ -231,6 +239,33 @@ public class GamePlay extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}*/
+			new CountDownTimer(time+1000, 1000) {
+
+			     public void onTick(long millisUntilFinished) {
+			         //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+			     }
+
+			     public void onFinish() {
+			    	 
+			        if(!clicked)
+			        	{
+			        	tv.setText("Game drawn");
+			        clicked = true;
+			        startClicked = true;
+			        try
+					{
+						mp.pause();
+						mp.seekTo(0);
+						mp1.start();
+					}
+					catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						
+					} 
+			        	}
+			     }
+			  }.start();
+			
 		}
 	};
 	void stopObjects()
@@ -261,5 +296,20 @@ public class GamePlay extends Activity {
 		float trans = mImageView1.getTranslationY()-mImageView2.getTranslationY();
 		if(trans+ih>=diff ) return true;
 		else return false;
+	}
+	void checkEnd()
+	{
+		if(score1==10)
+			{
+				mImageView1.setVisibility(View.INVISIBLE);
+				mImageView2.setVisibility(View.INVISIBLE);
+				tv.setText("PLAYER 1 WINS THE GAME!");
+			}
+		if(score2==10)
+		{
+			mImageView1.setVisibility(View.INVISIBLE);
+			mImageView2.setVisibility(View.INVISIBLE);
+			tv.setText("PLAYER 2 WINS THE GAME!");
+		}
 	}
 }

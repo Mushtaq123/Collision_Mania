@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,9 +26,10 @@ public class GamePlay_arc_circle extends Activity {
 	Button player1, player2,start ;
 	TextView tv,s1,s2;
 	
-	boolean clicked,startClicked ;
+	boolean clicked,startClicked,end ;
 	static int score1 = 0,score2 = 0;
 	static int noOfRounds = 0;
+	long T;
 	
 	Random rn = new Random();
 	
@@ -52,7 +54,9 @@ public class GamePlay_arc_circle extends Activity {
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
 		
-		
+		score1 = 0;
+		score2 = 0;
+		end = false;
 	//	newImageView1.setVisibility(View.INVISIBLE);
 		//newImageView2.setVisibility(View.INVISIBLE);
 		
@@ -68,12 +72,13 @@ public class GamePlay_arc_circle extends Activity {
 		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
 		score1 = 0;score2 = 0;
+		end = true;
 		start.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(!startClicked)
+				if(!startClicked && !end)
 				{	
 					//translate.run();
 					
@@ -94,12 +99,40 @@ public class GamePlay_arc_circle extends Activity {
 					
 					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
 					mImageView2.startAnimation(anim1);
+					T = anim.getDuration();
+					
+					new CountDownTimer(T+1000, 1000) {
+
+					     public void onTick(long millisUntilFinished) {
+					         //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+					     }
+
+					     public void onFinish() {
+					    	 
+					        if(!clicked)
+					        	{
+					        	tv.setText("Game drawn");
+					        clicked = true;
+					        startClicked = true;
+					        try
+							{
+								mp.pause();
+								mp.seekTo(0);
+								mp1.start();
+							}
+							catch (IllegalStateException e) {
+								// TODO Auto-generated catch block
+								
+							} 
+					        	}
+					     }
+					  }.start();
 					
 					noOfRounds++;
 					clicked = false;
 					startClicked = true;
 				}
-				if(startClicked && clicked)
+				if(startClicked && clicked && !end)
 				{
 					try{
 					mp1.pause();
@@ -122,6 +155,11 @@ public class GamePlay_arc_circle extends Activity {
 					
 					startClicked = false;
 					clicked = false;
+					if(score1==10 || score2==10) 
+					{
+						checkEnd();
+						end = true;
+					}
 				}
 			}
 		});
@@ -133,7 +171,7 @@ public class GamePlay_arc_circle extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
 				
-				if(!clicked && startClicked)
+				if(!clicked && startClicked && !end)
 				{
 					
 					try
@@ -187,7 +225,7 @@ public class GamePlay_arc_circle extends Activity {
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
 				
-				if(!clicked && startClicked)
+				if(!clicked && startClicked && !end)
 				{
 					
 					try
@@ -325,5 +363,20 @@ public class GamePlay_arc_circle extends Activity {
 		
 		//if(y1-y2>=2*mImageView1.getBottom())return true;
 		else return false;
+	}
+	void checkEnd()
+	{
+		if(score1==10)
+			{
+				mImageView1.setVisibility(View.INVISIBLE);
+				mImageView2.setVisibility(View.INVISIBLE);
+				tv.setText("PLAYER 1 WINS THE GAME!");
+			}
+		if(score2==10)
+		{
+			mImageView1.setVisibility(View.INVISIBLE);
+			mImageView2.setVisibility(View.INVISIBLE);
+			tv.setText("PLAYER 2 WINS THE GAME!");
+		}
 	}
 }
