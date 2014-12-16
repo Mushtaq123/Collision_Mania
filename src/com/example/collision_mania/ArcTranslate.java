@@ -20,6 +20,10 @@ private final int mType;
 public float myX;
 public float myY;
 
+private long mElapsedAtPause=0;
+private boolean mPaused=false;
+
+
 /**
  * A translation along an arc defined by three points and a Bezier Curve
  *
@@ -90,5 +94,23 @@ public void initialize(int width, int height, int parentWidth, int parentHeight)
   start = new Point(0,(int)startY);
   end = new Point(0,(int)endY);
   middle = new Point(mType*(int)middleX, (int)middleY);
+}
+@Override
+public boolean getTransformation(long currentTime, Transformation outTransformation) { 
+    if(mPaused && mElapsedAtPause==0) {
+        mElapsedAtPause=currentTime-getStartTime();
+    }
+    if(mPaused)
+        setStartTime(currentTime-mElapsedAtPause);
+    return super.getTransformation(currentTime, outTransformation);
+}
+
+public void pause() {
+    mElapsedAtPause=0;
+    mPaused=true;
+}
+
+public void resume() {
+    mPaused=false;
 }
 }

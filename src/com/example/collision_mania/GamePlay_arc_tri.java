@@ -148,6 +148,8 @@ public class GamePlay_arc_tri extends Activity {
 				}
 				if(startClicked && clicked && !end)
 				{
+					anim.cancel();
+					anim1.cancel();
 					try{
 						mp1.pause();
 						mp1.seekTo(0);
@@ -335,6 +337,8 @@ public class GamePlay_arc_tri extends Activity {
 		//tv.setText("x"+mImageView1.getTranslationY()+"  "+(mImageView2.getTop()- mImageView1.getTop())+" "+mImageView1.getHeight());*/
 		mImageView1.animate().cancel();
 		mImageView2.animate().cancel();
+		anim.pause();
+		anim1.pause();
 		
 		tv.setVisibility(View.INVISIBLE);
 		
