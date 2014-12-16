@@ -34,6 +34,7 @@ public class GamePlay_arc_tri extends Activity {
 	boolean clicked,startClicked,end ;
 	static int score1 = 0,score2 = 0;
 	static int noOfRounds = 0;
+	CountDownTimer timer;
 	
 	Random rn = new Random();
 	
@@ -113,7 +114,7 @@ public class GamePlay_arc_tri extends Activity {
 					mImageView2.startAnimation(anim1);
 					T = anim1.getDuration();
 					
-					new CountDownTimer(T+1000, 1000) {
+					timer = new CountDownTimer(T+1000, 1000) {
 
 					     public void onTick(long millisUntilFinished) {
 					         //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -325,7 +326,7 @@ public class GamePlay_arc_tri extends Activity {
 	};
 	void stopObjects()
 	{
-		
+		timer.cancel();
 		/*Float f = mImageView1.getTranslationY();
 		Log.i("Try",Float.toString(f) );
 		Float f1 = mImageView2.getTranslationY();

@@ -26,6 +26,7 @@ public class GamePlay extends Activity {
 	boolean clicked,startClicked,end ;
 	static int score1 = 0,score2 = 0;
 	static int noOfRounds = 0;
+	CountDownTimer timer;
 
 	Random rn = new Random();
 	
@@ -239,7 +240,7 @@ public class GamePlay extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}*/
-			new CountDownTimer(time+1000, 1000) {
+			timer = new CountDownTimer(time+1000, 1000) {
 
 			     public void onTick(long millisUntilFinished) {
 			         //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -270,7 +271,7 @@ public class GamePlay extends Activity {
 	};
 	void stopObjects()
 	{
-		
+		timer.cancel();
 		Float f = mImageView1.getTranslationY();
 		Log.i("Try",Float.toString(f) );
 		Float f1 = mImageView2.getTranslationY();

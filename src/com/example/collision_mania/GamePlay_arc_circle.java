@@ -30,6 +30,7 @@ public class GamePlay_arc_circle extends Activity {
 	static int score1 = 0,score2 = 0;
 	static int noOfRounds = 0;
 	long T;
+	CountDownTimer timer;
 	
 	Random rn = new Random();
 	
@@ -54,8 +55,7 @@ public class GamePlay_arc_circle extends Activity {
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
 		
-		score1 = 0;
-		score2 = 0;
+		score1 = 0;score2 = 0;
 		end = false;
 	//	newImageView1.setVisibility(View.INVISIBLE);
 		//newImageView2.setVisibility(View.INVISIBLE);
@@ -71,8 +71,6 @@ public class GamePlay_arc_circle extends Activity {
 		mp = MediaPlayer.create(getApplicationContext(), R.raw.backmusic);
 		mp1 = MediaPlayer.create(getApplicationContext(), R.raw.collision);
 		
-		score1 = 0;score2 = 0;
-		end = true;
 		start.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -101,7 +99,7 @@ public class GamePlay_arc_circle extends Activity {
 					mImageView2.startAnimation(anim1);
 					T = anim.getDuration();
 					
-					new CountDownTimer(T+1000, 1000) {
+					timer = new CountDownTimer(T+1000, 1000) {
 
 					     public void onTick(long millisUntilFinished) {
 					         //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -308,7 +306,7 @@ public class GamePlay_arc_circle extends Activity {
 	};
 	void stopObjects()
 	{
-		
+		timer.cancel();
 		/*Float f = mImageView1.getTranslationY();
 		Log.i("Try",Float.toString(f) );
 		Float f1 = mImageView2.getTranslationY();
