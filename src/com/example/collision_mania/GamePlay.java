@@ -295,7 +295,7 @@ public class GamePlay extends Activity {
 		else ih= iH*iw/iW;//rescaled height of image within ImageView
 		float diff = ( mImageView2.getTop()- mImageView1.getTop());
 		float trans = mImageView1.getTranslationY()-mImageView2.getTranslationY();
-		if(trans+ih>=diff ) return true;
+		if(trans+ih>diff ) return true;
 		else return false;
 	}
 	void checkEnd()

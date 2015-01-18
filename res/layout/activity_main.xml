@@ -10,36 +10,13 @@
     android:background="@drawable/blue_and_red" >
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button4"
-        android:layout_alignLeft="@+id/button4"
-        android:layout_alignRight="@+id/button4"
-        android:layout_marginBottom="34dp"
-        android:background="#000000"
-        android:text="Triangle"
-        android:textColor="#ff0000" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="71dp"
-        android:background="#000000"
-        android:text="Triangle Arc"
-        android:textColor="#ff0000" />
-
-    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
         android:layout_alignLeft="@+id/button2"
+        android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/button2"
-        android:layout_marginBottom="42dp"
+        android:layout_marginTop="24dp"
         android:background="#000000"
         android:text="Ball-Trans"
         android:textColor="#ff0000" />
@@ -48,12 +25,47 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button3"
         android:layout_alignLeft="@+id/button3"
         android:layout_alignRight="@+id/button3"
-        android:layout_marginBottom="44dp"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="34dp"
         android:background="#000000"
         android:text="Ball-Arc"
         android:textColor="#ff0000" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignRight="@+id/button4"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="22dp"
+        android:background="#000000"
+        android:text="Triangle"
+        android:textColor="#ff0000" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:background="#000000"
+        android:text="Triangle Arc"
+        android:textColor="#ff0000" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignRight="@+id/button4"
+        android:layout_below="@+id/button4"
+        android:layout_marginTop="36dp"
+        android:background="#000000"
+        android:text="Arcade"
+        android:textColor="#ff0000"/>
 
 </RelativeLayout>

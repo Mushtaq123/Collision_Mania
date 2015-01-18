@@ -26,6 +26,7 @@
         <activity android:label="@string/app_name" android:name=".GamePlay_arc_circle"/>
         <activity android:label="@string/app_name" android:name=".GamePlay_tri_trans"/>
         <activity android:label="@string/app_name" android:name=".GamePlay_arc_tri"/>
+        <activity android:label="@string/app_name" android:name=".Arcade"/>
     </application>
 
 </manifest>

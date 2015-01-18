@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	Button start,start1,startTri,startTri1;
+	Button start,start1,startTri,startTri1,startArcade;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
 		start1 = (Button)findViewById(R.id.button2);
 		startTri = (Button)findViewById(R.id.button3);
 		startTri1 = (Button)findViewById(R.id.button4);
+		startArcade = (Button)findViewById(R.id.button5);
 		
 		TranslateAnimation anim = new TranslateAnimation(-500,0, 0, 0); //first 0 is start point, 150 is end point horizontal
 		anim.setDuration(3000); // 1000 ms = 1second
@@ -29,7 +30,7 @@ public class MainActivity extends Activity {
 		start1.startAnimation(anim);
 		startTri.startAnimation(anim);
 		startTri1.startAnimation(anim);
-		
+		startArcade.startAnimation(anim);
 		
 		start.setOnClickListener(new View.OnClickListener() {
 			
@@ -67,6 +68,16 @@ public class MainActivity extends Activity {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				Intent myIntent = new Intent(MainActivity.this, GamePlay_arc_tri.class);
+				myIntent.putExtra("Level", "1");
+				MainActivity.this.startActivity(myIntent);
+			}
+		});
+		startArcade.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent myIntent = new Intent(MainActivity.this, Arcade.class);
 				myIntent.putExtra("Level", "1");
 				MainActivity.this.startActivity(myIntent);
 			}
