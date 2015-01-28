@@ -37,6 +37,7 @@ public class Arcade extends Activity {
 	Long T;
 	
 	float x1,y1,x2,y2;
+	float top1,top2,left1,left2;
 
 	Random rn = new Random();
 	
@@ -56,6 +57,7 @@ public class Arcade extends Activity {
 		
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
+		
 		Random generator = new Random(); 
 		i = generator.nextInt(3) + 1;
 		
@@ -178,26 +180,41 @@ public class Arcade extends Activity {
 							// TODO Auto-generated catch block
 							
 						} 
-					mImageView1.setY(mImageView1.getTop());
-					mImageView2.setY(mImageView2.getTop());
+					
 					
 					Random generator = new Random();
 					i = generator.nextInt(3) + 1;
 					
 					if(i==1)
 					{
+						mImageView1.setY(mImageView1.getTop());
+						mImageView2.setY(mImageView2.getTop());
+						mImageView1.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
+						mImageView2.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
+						mImageView1.setRotation(0);
+						mImageView2.setRotation(0);
+						
 						mImageView1.setImageResource(R.drawable.b128);
 						mImageView2.setImageResource(R.drawable.b128);
 					}
 					
 					if(i==2)
 					{
+						anim.cancel();
+						anim1.cancel();
 						mImageView1.setImageResource(R.drawable.b128);
 						mImageView2.setImageResource(R.drawable.b128);
 					}
 					
 					if(i==3)
 					{
+						mImageView1.setY(mImageView1.getTop());
+						mImageView2.setY(mImageView2.getTop());
+						mImageView1.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
+						mImageView2.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
+						mImageView1.setRotation(0);
+						mImageView2.setRotation(0);
+						
 						mImageView1.setImageResource(R.drawable.triangle);
 						mImageView2.setImageResource(R.drawable.triangle1);
 					}
@@ -240,10 +257,7 @@ public class Arcade extends Activity {
 						// TODO Auto-generated catch block
 						
 					} 
-					y1 = anim.myY;
-					y2 = anim1.myY;
-					x1 = anim.myX;
-					x2 = anim1.myX;
+					
 					boolean b = true;
 					if(i==1)
 						{
@@ -252,6 +266,10 @@ public class Arcade extends Activity {
 						}
 					if(i==2)
 					{
+						y1 = anim.myY;
+						y2 = anim1.myY;
+						x1 = anim.myX;
+						x2 = anim1.myX;
 						stopObjects2();
 						b = victory2(x1,y1,x2,y2); 
 					}
@@ -301,10 +319,7 @@ public class Arcade extends Activity {
 						// TODO Auto-generated catch block
 						
 					} 
-					y1 = anim.myY;
-					y2 = anim1.myY;
-					x1 = anim.myX;
-					x2 = anim1.myX;
+					
 					boolean b = true;
 					if(i==1)
 						{
@@ -313,6 +328,10 @@ public class Arcade extends Activity {
 						}
 					if(i==2)
 					{
+						y1 = anim.myY;
+						y2 = anim1.myY;
+						x1 = anim.myX;
+						x2 = anim1.myX;
 						stopObjects2();
 						b = victory2(x1,y1,x2,y2); 
 					}

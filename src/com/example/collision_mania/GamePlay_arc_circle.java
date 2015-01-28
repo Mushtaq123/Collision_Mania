@@ -361,6 +361,7 @@ public class GamePlay_arc_circle extends Activity {
 		float diff = ( mImageView2.getTop()- mImageView1.getTop());
 		float trans = y1-y2;
 		float trans2 = x1-x2;
+		double center_distance = Math.sqrt(Math.pow(x1-x2,2)+Math.pow(y1-y2, 2));
 		if(trans+ih>=diff && trans2<=ih  ) return true;
 		
 		//if(y1-y2>=2*mImageView1.getBottom())return true;
