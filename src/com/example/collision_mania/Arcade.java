@@ -180,19 +180,25 @@ public class Arcade extends Activity {
 							// TODO Auto-generated catch block
 							
 						} 
+					if(i==2)
+					{
+						mImageView1.clearAnimation();
+						mImageView2.clearAnimation();
+					}
 					
+					mImageView1.setY(top1);
+					mImageView2.setY(top2);
+					mImageView1.setX(left1);
+					mImageView2.setX(left2);
+					mImageView1.setRotation(0);
+					mImageView2.setRotation(0);
 					
+
 					Random generator = new Random();
 					i = generator.nextInt(3) + 1;
 					
 					if(i==1)
 					{
-						mImageView1.setY(top1);
-						mImageView2.setY(top2);
-						mImageView1.setX(left1);
-						mImageView2.setX(left2);
-						mImageView1.setRotation(0);
-						mImageView2.setRotation(0);
 						
 						mImageView1.setImageResource(R.drawable.b128);
 						mImageView2.setImageResource(R.drawable.b128);
@@ -200,21 +206,12 @@ public class Arcade extends Activity {
 					
 					if(i==2)
 					{
-						anim.cancel();
-						anim1.cancel();
 						mImageView1.setImageResource(R.drawable.b128);
 						mImageView2.setImageResource(R.drawable.b128);
 					}
 					
 					if(i==3)
 					{
-						mImageView1.setY(top1);
-						mImageView2.setY(top2);
-						mImageView1.setX(left1);
-						mImageView2.setX(left2);
-						mImageView1.setRotation(0);
-						mImageView2.setRotation(0);
-						
 						mImageView1.setImageResource(R.drawable.triangle);
 						mImageView2.setImageResource(R.drawable.triangle1);
 					}
@@ -228,6 +225,8 @@ public class Arcade extends Activity {
 					
 					startClicked = false;
 					clicked = false;
+					
+
 					
 					if(score1==10 || score2==10) 
 					{
@@ -636,4 +635,5 @@ public class Arcade extends Activity {
 	        left2 = left1;
 	    }
 	}
+	
 }
