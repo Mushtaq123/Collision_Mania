@@ -78,7 +78,6 @@ public class Arcade extends Activity {
 			mImageView1.setImageResource(R.drawable.triangle);
 			mImageView2.setImageResource(R.drawable.triangle1);
 		}
-		
 		player1 = (Button) findViewById(R.id.button1);
 		player2 = (Button) findViewById(R.id.button2);
 		start = (Button) findViewById(R.id.button3);
@@ -99,6 +98,7 @@ public class Arcade extends Activity {
 				// TODO Auto-generated method stub
 				if(!startClicked && !end)
 				{	
+					
 					startTime = System.currentTimeMillis();
 					
 					if(i==1)
@@ -118,7 +118,7 @@ public class Arcade extends Activity {
 					} 
 					if(i==2)
 					{
-						float diff = ( mImageView2.getTop()- mImageView1.getTop());
+						float diff = ( top2- top1);
 						diff = diff/2;
 						anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
 						mImageView1.startAnimation(anim);
@@ -187,10 +187,10 @@ public class Arcade extends Activity {
 					
 					if(i==1)
 					{
-						mImageView1.setY(mImageView1.getTop());
-						mImageView2.setY(mImageView2.getTop());
-						mImageView1.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
-						mImageView2.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
+						mImageView1.setY(top1);
+						mImageView2.setY(top2);
+						mImageView1.setX(left1);
+						mImageView2.setX(left2);
 						mImageView1.setRotation(0);
 						mImageView2.setRotation(0);
 						
@@ -208,10 +208,10 @@ public class Arcade extends Activity {
 					
 					if(i==3)
 					{
-						mImageView1.setY(mImageView1.getTop());
-						mImageView2.setY(mImageView2.getTop());
-						mImageView1.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
-						mImageView2.setX(mImageView1.getLeft()/2+mImageView1.getRight()/2);
+						mImageView1.setY(top1);
+						mImageView2.setY(top2);
+						mImageView1.setX(left1);
+						mImageView2.setX(left2);
 						mImageView1.setRotation(0);
 						mImageView2.setRotation(0);
 						
@@ -228,6 +228,7 @@ public class Arcade extends Activity {
 					
 					startClicked = false;
 					clicked = false;
+					
 					if(score1==10 || score2==10) 
 					{
 						checkEnd();
@@ -624,5 +625,15 @@ public class Arcade extends Activity {
 			mImageView2.setVisibility(View.INVISIBLE);
 			tv.setText("PLAYER 2 WINS THE GAME!");
 		}
+	}
+	@Override
+	public void onWindowFocusChanged (boolean hasFocus){
+	    super.onWindowFocusChanged(hasFocus);
+	    if(hasFocus){
+	        top1 = mImageView1.getTop();
+	        top2 = mImageView2.getTop();
+	        left1 = mImageView1.getLeft();
+	        left2 = left1;
+	    }
 	}
 }
