@@ -90,12 +90,13 @@ public class GamePlay_arc_circle extends Activity {
 						// TODO Auto-generated catch block
 						
 					} 
+					int time = rn.nextInt(3001)+ 2000;
 					float diff = ( mImageView2.getTop()- mImageView1.getTop());
 					diff = diff/2;
-					anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
+					anim =  new ArcTranslate(time,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
 					mImageView1.startAnimation(anim);
 					
-					anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
+					anim1 = new ArcTranslate(time,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
 					mImageView2.startAnimation(anim1);
 					T = anim.getDuration();
 					
