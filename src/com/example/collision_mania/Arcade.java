@@ -120,10 +120,11 @@ public class Arcade extends Activity {
 					{
 						float diff = ( top2- top1);
 						diff = diff/2;
-						anim =  new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
+						int time = rn.nextInt(3001)+ 2000;
+						anim =  new ArcTranslate(time,Animation.ABSOLUTE,0,Animation.ABSOLUTE,diff,Animation.ABSOLUTE,mImageView1.getX(),1);
 						mImageView1.startAnimation(anim);
 						
-						anim1 = new ArcTranslate(3000,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
+						anim1 = new ArcTranslate(time,Animation.ABSOLUTE,0,Animation.ABSOLUTE,-diff,Animation.ABSOLUTE,mImageView1.getX(),-1);
 						mImageView2.startAnimation(anim1);
 						T = anim.getDuration();
 						
