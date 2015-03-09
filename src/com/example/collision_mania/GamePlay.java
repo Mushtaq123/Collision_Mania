@@ -42,7 +42,7 @@ public class GamePlay extends Activity {
 		//}
 		Log.i("Level ",value);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_play);
+		setContentView(R.layout.game_play_new);
 		
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);

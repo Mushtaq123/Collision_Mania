@@ -30,7 +30,7 @@
         android:layout_above="@+id/button2"
         android:layout_centerHorizontal="true"
         android:layout_weight="0.2"
-        android:src="@drawable/b128" />
+        android:src="@drawable/triangle" />
 
     <ImageView
         android:id="@+id/icon1"
@@ -39,14 +39,13 @@
         android:layout_alignLeft="@+id/icon2"
         android:layout_below="@+id/button1"
         android:layout_weight="0.2"
-        android:src="@drawable/b128" />
+        android:src="@drawable/triangle1" />
     <LinearLayout
-        android:id="@+id/ll"
         android:layout_centerInParent="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        android:layout_marginTop="80dp" >
 
         <TextView
             android:id="@+id/textView1"

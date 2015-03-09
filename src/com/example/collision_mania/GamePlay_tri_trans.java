@@ -47,7 +47,7 @@ public class GamePlay_tri_trans extends Activity{
 		//}
 		Log.i("Level ",value);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_play_tri);
+		setContentView(R.layout.game_play_tri_new);
 		
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
