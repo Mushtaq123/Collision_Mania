@@ -12,34 +12,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PLAYER 1" />
-
-    
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="PLAYER 2" />
-
-    <ImageView
-        android:id="@+id/icon2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_above="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_weight="0.2"
-        android:src="@drawable/b128" />
-
-    <ImageView
-        android:id="@+id/icon1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignLeft="@+id/icon2"
-        android:layout_below="@+id/button1"
-        android:layout_weight="0.2"
-        android:src="@drawable/b128" />
     <LinearLayout
         android:id="@+id/ll"
         android:layout_centerInParent="true"
@@ -91,5 +63,31 @@
 	        </LinearLayout>
         
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="PLAYER 2" />
+
+    <ImageView
+        android:id="@+id/icon2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.2"
+        android:src="@drawable/b128" />
+
+    <ImageView
+        android:id="@+id/icon1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/icon2"
+        android:layout_below="@+id/button1"
+        android:layout_weight="0.2"
+        android:src="@drawable/b128" />
 
 </RelativeLayout>

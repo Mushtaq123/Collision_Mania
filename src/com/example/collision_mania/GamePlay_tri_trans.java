@@ -47,7 +47,7 @@ public class GamePlay_tri_trans extends Activity{
 		//}
 		Log.i("Level ",value);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_play_tri_new);
+		setContentView(R.layout.game_play_tri);
 		
 		mImageView1 = (ImageView) findViewById(R.id.icon1);
 		mImageView2 = (ImageView) findViewById(R.id.icon2);
@@ -333,15 +333,6 @@ public class GamePlay_tri_trans extends Activity{
 		Log.i("Try",Double.toString(r) );
 		if(trans+2*val>=diff ) return true;
 		else return false;
-	}
-	private void moveToBack(View currentView) 
-	{
-	    ViewGroup vg = ((ViewGroup) currentView.getParent());
-	    int index = vg.indexOfChild(currentView);
-	    for(int i = 0; i<index; i++)
-	    {
-	    vg.bringChildToFront(vg.getChildAt(0));
-	    }
 	}
 	void checkEnd()
 	{
